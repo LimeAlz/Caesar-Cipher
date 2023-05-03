@@ -1,7 +1,30 @@
+def overflow(num,casel)
+  if(casel == "U")
+     if (num > 90)
+      num = num -26
+     end
+  elsif(casel =="L")
+    if(num>122)
+      num = num -26
+  end
+  return num
+end
+
+end
+
 def caesar(text, number)
   new_string = ""
+  casel = ""
   for i in 0...text.length
-    (text[i] == " ") ? new_string << " " : new_string << (text[i].ord + 3).chr
+    if (text[i].ord >= 65 and text[i].ord <= 90)
+      casel = 'U'
+      new_string << overflow((text[i].ord + number.to_i),casel).chr
+    elsif (text[i].ord >= 97 and text[i].ord <= 122)
+      casel ="L"
+      new_string << overflow((text[i].ord + number.to_i),casel).chr
+    else
+      new_string << text[i]
+    end
   end
   return new_string
 end
